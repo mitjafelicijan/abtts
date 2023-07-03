@@ -1,4 +1,6 @@
-tmp
+tmp/
+out/
+.venv/
+
 *.mp3
 *.json
-.venv

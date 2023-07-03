@@ -10,7 +10,9 @@ from pydub import AudioSegment
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, APIC, TIT2, TPE1, TYER, TENC, error
 
-TMP_DIR = "tmp/"
+TMP_DIR = os.environ.get("TMP_DIR", "tmp/")
+OUT_DIR = os.environ.get("OUT_DIR", "out/")
+
 OMIT_US = int(os.environ.get("OMIT_US", 0))
 US_BEARER = os.environ.get("US_BEARER", None)
 US_VOICE_ID = os.environ.get("US_VOICE_ID", "male-4")
@@ -131,10 +133,16 @@ if __name__ == "__main__":
                     fp.write(response.content)
             except requests.exceptions.RequestException as e:
                 print("! ERROR: Request failed: {}".format(e))
-                
+                            
+    # Make output directory for audio files.
+    if not os.path.exists(OUT_DIR):
+        try:
+            os.makedirs(OUT_DIR)
+        except OSError as e:
+            print("! ERROR: Directory creation failed: {}".format(e))
 
     # Generate slug for book filename.
-    audiobook_path = "{}.mp3".format(slugify(book["title"]))
+    audiobook_path = "{}/{}.mp3".format(OUT_DIR, slugify(book["title"]))
     
     # Combine all audio paragraphs into one Mp3 file.
     print("> Combining all audio paragraphs into one audio file...")
@@ -171,6 +179,6 @@ if __name__ == "__main__":
     
     print("> Done and done...")
     
-    # Parse all chapters into paragraphs
-    with open("{}.json".format(slugify(book["title"])), "w") as file:
+    # Storing JSON report for the created audiobook.
+    with open("{}/{}.json".format(OUT_DIR, slugify(book["title"])), "w") as file:
         json.dump({ "book": book, "chapters": chapters, "paragraphs": paragraphs }, file)
