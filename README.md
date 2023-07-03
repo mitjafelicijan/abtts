@@ -43,6 +43,12 @@ US_BEARER="CW5RhoOX..." python3 abtts.py --book-folder=books/armageddon-2419/
 - A JSON report file with the same slug name as MP3 file will also be generated
   for you so you can see if all went well.
 
+> This example book was taken from [Standard
+> Ebooks](https://standardebooks.org/ebooks/philip-francis-nowlan/armageddon-2419-a-d). They
+> have an amazing assortment of books. You should definitely check them out. All
+> of their material is available on [GitHub](https://github.com/standardebooks)
+> as well.
+
 ## Environmental variables
 
 Environmental variables can prefix python command like in the example above with
