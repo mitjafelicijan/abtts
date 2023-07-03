@@ -31,7 +31,8 @@ pip install -r requirements.txt
 
 - First you need to create [UnrealSpeech](https://unrealspeech.com/) account.
 - Create an API Token and store. You will need it for this.
-- Generate first book that is provided with this repository.
+- Generate first book that is provided with this repository. Use the API token
+  in `US_BEARER` variable like in example below.
 
 ```sh
 US_BEARER="CW5RhoOX..." python3 abtts.py --book-folder=books/armageddon-2419/
