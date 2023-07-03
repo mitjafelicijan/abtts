@@ -1,4 +1,4 @@
-# Create audiobook from text files
+# Create audiobooks from text files
 
 - This program is written in Python and is using
   [UnrealSpeech](https://unrealspeech.com/) under the hood for TTS.
