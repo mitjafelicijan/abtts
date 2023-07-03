@@ -4,3 +4,5 @@ out/
 
 *.mp3
 *.json
+
+!samples/*.mp3
