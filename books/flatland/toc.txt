@@ -1,0 +1,31 @@
+# Source: https://standardebooks.org/ebooks/edwin-a-abbott/flatland
+
+-- title: Flatland
+-- author: Edwin A. Abbott
+-- year: 1884
+-- cover: cover.jpg
+-- words: 33608
+-- length: 2 hour 3 minutes
+
+chapter1.txt
+chapter2.txt
+chapter3.txt
+chapter4.txt
+chapter5.txt
+chapter6.txt
+chapter7.txt
+chapter8.txt
+chapter9.txt
+chapter10.txt
+chapter11.txt
+chapter12.txt
+chapter13.txt
+chapter14.txt
+chapter15.txt
+chapter16.txt
+chapter17.txt
+chapter18.txt
+chapter19.txt
+chapter20.txt
+chapter21.txt
+chapter22.txt
