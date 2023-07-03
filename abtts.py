@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import shutil
 import argparse
 import requests
 
@@ -103,8 +104,17 @@ if __name__ == "__main__":
         print("! ERROR: No paragrapgs found for the current book.")
         sys.exit(1)
 
+    # Removes the temporary folder.
+    if os.path.exists(TMP_DIR):
+        print("> Cleaning up `{}` directory...".format(TMP_DIR))
+        try:
+            shutil.rmtree(TMP_DIR)
+        except OSError as e:
+            print("! ERROR: Removing `{}` directory failed: {}".format(TMP_DIR, e))
+    
     # Make temporary directory for audio files.
     if not os.path.exists(TMP_DIR):
+        print("> Creating `{}` directory...".format(TMP_DIR))
         try:
             os.makedirs(TMP_DIR)
         except OSError as e:
@@ -113,9 +123,9 @@ if __name__ == "__main__":
     # Convert all paragraphs to audio files.
     if not OMIT_US:
         print("> Requesting audio files...")
-
+        
         # Creates introduction.
-        print("> Proccesing introduction")
+        print("> Processing introduction...")
         try:
             intro_text = "{}\nBook by {}\nWritten in year {}.\nThis book has {} words.".format(
                 book["title"],
