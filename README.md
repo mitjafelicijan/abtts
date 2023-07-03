@@ -104,3 +104,9 @@ chapter4.txt
 - https://github.com/jiaaro/pydub
 - https://github.com/quodlibet/mutagen
 - https://github.com/un33k/python-slugify
+
+## License
+
+[abtts](https://github.com/mitjafelicijan/abtts) was written by [Mitja
+Felicijan](https://mitjafelicijan.com) and is released under the BSD two-clause
+license, see the LICENSE file for more information.
