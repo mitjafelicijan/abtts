@@ -109,10 +109,42 @@ if __name__ == "__main__":
             os.makedirs(TMP_DIR)
         except OSError as e:
             print("! ERROR: Directory creation failed: {}".format(e))
-
+    
     # Convert all paragraphs to audio files.
     if not OMIT_US:
         print("> Requesting audio files...")
+
+        # Creates introduction.
+        print("> Proccesing introduction")
+        try:
+            intro_text = "{}\nBook by {}\nWritten in year {}.\nThis book has {} words.".format(
+                book["title"],
+                book["author"],
+                book["year"],
+                book["words"],
+            )
+
+            response = requests.post(
+                "https://api.v5.unrealspeech.com/speech",
+                headers = {
+                    "Authorization" : "Bearer {}".format(US_BEARER)
+                },
+                json = {
+                    "Text": intro_text,
+                    "VoiceId": US_VOICE_ID,
+                    "AudioFormat": US_AUDIO_FORMAT,
+                    "BitRate": US_BIT_RATE,
+                }
+            )
+            
+            with open("{}/{}.mp3".format(TMP_DIR, "introduction"), 'wb') as fp:
+                fp.write(response.content)
+        except requests.exceptions.RequestException as e:
+            print("! ERROR: Request failed: {}".format(e))
+            sys.exit(1)
+                
+        
+        # Loop over all paragraphs.
         for idx, paragraph in enumerate(paragraphs):
             print("> Proccesing paragraphs: {}/{}".format(idx+1, len(paragraphs)), end="\r")
             try:
@@ -133,6 +165,7 @@ if __name__ == "__main__":
                     fp.write(response.content)
             except requests.exceptions.RequestException as e:
                 print("! ERROR: Request failed: {}".format(e))
+                sys.exit(1)
                             
     # Make output directory for audio files.
     if not os.path.exists(OUT_DIR):
@@ -147,6 +180,8 @@ if __name__ == "__main__":
     # Combine all audio paragraphs into one Mp3 file.
     print("> Combining all audio paragraphs into one audio file...")
     audio_segments = []
+    audio_segments.append(AudioSegment.silent(duration=START_END_SILENCE))
+    audio_segments.append(AudioSegment.from_file("{}/{}.mp3".format(TMP_DIR, "introduction"), format="mp3"))
     audio_segments.append(AudioSegment.silent(duration=START_END_SILENCE))
     for idx, paragraph in enumerate(paragraphs):
         paragraph_audio_path = "{}/{}.mp3".format(TMP_DIR, idx)
