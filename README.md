@@ -8,7 +8,7 @@
 ## What does it do?
 
 - Converts text files into MP3 audiobook.
-- Baked ID3 tags and cover image to MP3 file.
+- Bakes ID3 tags and cover image to MP3 file.
 - Has a really awesome reading voice provided by
   [UnrealSpeech](https://unrealspeech.com/).
 
