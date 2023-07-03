@@ -1,0 +1,19 @@
+-- title: Armageddon 2419 A.D.
+-- author: Philip Francis Nowlan
+-- year: 1929
+-- cover: cover.jpg
+-- words: 27337
+-- length: 1 hour 40 minutes
+
+chapter1.txt
+chapter2.txt
+chapter3.txt
+chapter4.txt
+chapter5.txt
+chapter6.txt
+chapter7.txt
+chapter8.txt
+chapter9.txt
+chapter10.txt
+chapter11.txt
+chapter12.txt
