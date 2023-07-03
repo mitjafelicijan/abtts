@@ -2,7 +2,7 @@
 
 -- title: The Airlords of Han
 -- author: Philip Francis Nowlan
--- year: 1928
+-- year: 1929
 -- cover: cover.jpg
 -- words: 30061
 -- length: 1 hour 50 minutes
