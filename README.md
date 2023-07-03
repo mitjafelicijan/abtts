@@ -2,7 +2,7 @@
 
 - This program is written in Python and is using
   [UnrealSpeech](https://unrealspeech.com/) under the hood for TTS.
-- Check out an [sudio sample of a pragraph](./samples/paragraph.mp3) to see the
+- Check out an [audio sample of a paragraph](./samples/paragraph.mp3) to see the
   quality of audio.
 
 ## What does it do?
