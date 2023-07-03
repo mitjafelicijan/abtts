@@ -14,9 +14,17 @@ Audio sample: https://github.com/mitjafelicijan/abtts/raw/master/samples/25.mp3
 
 ## Install
 
+**Program uses [virtual
+environments](https://docs.python.org/3/library/venv.html) so make sure that you
+have Python, Pip and virtual environments installed properly.**
+
 ```sh
 git clone git@github.com:mitjafelicijan/abtts.git
 cd abtts
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## How to use it
@@ -53,7 +61,9 @@ Environmental variables can prefix python command like in the example above with
 ## Create new audiobooks
 
 - Books have a specific filesystem structure. Each book needs to have `toc.txt`
-file and cover image in the same directory.
+  file and cover image in the same directory.
+- Each book should have it's own directory to itself. Do not mix and match
+  multiple books together.
 - Books should be split into chapters, but also only one chapter is sufficient.
 
 And example of TOC file.
