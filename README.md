@@ -68,7 +68,7 @@ Environmental variables can prefix python command like in the example above with
 
 And example of TOC file.
 
-```
+```sql
 -- title: Armageddon 2419 A.D.
 -- author: Philip Francis Nowlan
 -- year: 1929
