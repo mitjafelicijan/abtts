@@ -54,16 +54,16 @@ US_BEARER="CW5RhoOX..." python3 abtts.py --book-folder=books/armageddon-2419/
 Environmental variables can prefix python command like in the example above with
 `US_BEARER`.
 
-| Variable          | Default value | Description                                      |
-|-------------------|---------------|--------------------------------------------------|
-| TMP_DIR           | tmp/          | Paragraph MP3's are put                          |
-| OUT_DIR           | out/          | Final audiobook location                         |
-| OMIT_US           | 0             | If 0 API will not get called                     |
-| US_BEARER         | None          | Bearer token for UnrealSpeech                    |
-| US_VOICE_ID       | male-4        | Selected voice ID (male-0..male-4)               |
-| US_AUDIO_FORMAT   | mp3           | Leave to MP3!                                    |
-| US_BIT_RATE       | 192k          | Leave to default value!                          |
-| START_END_SILENCE | 2000          | How many seconds get added at beginning and end. |
+| Variable          | Default value | Description                                           |
+|-------------------|---------------|-------------------------------------------------------|
+| TMP_DIR           | tmp/          | Paragraph MP3's are put                               |
+| OUT_DIR           | out/          | Final audiobook location                              |
+| OMIT_US           | 0             | If 0 API will not get called                          |
+| US_BEARER         | None          | Bearer token for UnrealSpeech                         |
+| US_VOICE_ID       | male-4        | Selected voice ID (male-0..male-4)                    |
+| US_AUDIO_FORMAT   | mp3           | Leave to MP3!                                         |
+| US_BIT_RATE       | 192k          | Leave to default value!                               |
+| START_END_SILENCE | 2000          | How many milliseconds get added at beginning and end. |
 
 ## Create new audiobooks
 
