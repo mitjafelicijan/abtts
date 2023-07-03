@@ -12,7 +12,7 @@
 - Has a really awesome reading voice provided by
   [UnrealSpeech](https://unrealspeech.com/).
 
-## Install
+## Installation
 
 **Program uses [virtual
 environments](https://docs.python.org/3/library/venv.html) so make sure that you
