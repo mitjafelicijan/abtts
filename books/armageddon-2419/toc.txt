@@ -1,3 +1,5 @@
+# Source: https://standardebooks.org/ebooks/philip-francis-nowlan/armageddon-2419-a-d
+
 -- title: Armageddon 2419 A.D.
 -- author: Philip Francis Nowlan
 -- year: 1929
