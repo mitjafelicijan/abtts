@@ -1,0 +1,22 @@
+# Source: https://standardebooks.org/ebooks/h-g-wells/the-time-machine
+
+-- title: The Time Machine
+-- author: H. G. Wells
+-- year: 1895
+-- cover: cover.jpg
+-- words: 32551
+-- length: 1 hour 59 minutes
+
+chapter1.txt
+chapter2.txt
+chapter3.txt
+chapter4.txt
+chapter5.txt
+chapter6.txt
+chapter7.txt
+chapter8.txt
+chapter9.txt
+chapter10.txt
+chapter11.txt
+chapter12.txt
+chapter13.txt

@@ -104,6 +104,7 @@ chapter4.txt
 - [Flatland, Edwin A. Abbott, 1884](./books/flatland)
 - [The Airlords of Han, Philip Francis Nowlan, 1929](./books/the-airlords-of-han)
 - [The Strange Case of Dr. Jekyll and Mr. Hyde, Robert Louis Stevenson, 1886](./books/the-strange-case-of-dr-jekyll-and-mr-hyde)
+- [The Time Machine, H. G. Wells, 1895](./books/the-time-machine)
 
 ## Libraries used
 
