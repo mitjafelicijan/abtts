@@ -1,9 +1,9 @@
 # Create audiobook from text files
 
-This program is written in Python and is using
-[UnrealSpeech](https://unrealspeech.com/) under the hood for TTS.
-
-Audio sample: https://github.com/mitjafelicijan/abtts/raw/master/samples/25.mp3
+- This program is written in Python and is using
+  [UnrealSpeech](https://unrealspeech.com/) under the hood for TTS.
+- Check out an [sudio sample of a pragraph](./samples/paragraph.mp3) to see the
+  quality of audio.
 
 ## What does it do?
 
@@ -100,10 +100,10 @@ chapter4.txt
 
 ## Included books
 
-- [Armageddon 2419 A.D., Philip Francis Nowlan, 1929](https://github.com/mitjafelicijan/abtts/tree/master/books/armageddon-2419)
-- [Flatland, Edwin A. Abbott, 1884](https://github.com/mitjafelicijan/abtts/tree/master/books/flatland)
-- [The Airlords of Han, Philip Francis Nowlan, 1929](https://github.com/mitjafelicijan/abtts/tree/master/books/the-airlords-of-han)
-- [The Strange Case of Dr. Jekyll and Mr. Hyde, Robert Louis Stevenson, 1886](https://github.com/mitjafelicijan/abtts/tree/master/books/the-strange-case-of-dr-jekyll-and-mr-hyde)
+- [Armageddon 2419 A.D., Philip Francis Nowlan, 1929](./books/armageddon-2419)
+- [Flatland, Edwin A. Abbott, 1884](./books/flatland)
+- [The Airlords of Han, Philip Francis Nowlan, 1929](./books/the-airlords-of-han)
+- [The Strange Case of Dr. Jekyll and Mr. Hyde, Robert Louis Stevenson, 1886](./books/the-strange-case-of-dr-jekyll-and-mr-hyde)
 
 ## Libraries used
 
