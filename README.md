@@ -3,7 +3,7 @@
 This program is written in Python and is using
 [UnrealSpeech](https://unrealspeech.com/) under the hood for TTS.
 
-https://github.com/mitjafelicijan/abtts/raw/master/samples/25.mp3
+<audio src="https://github.com/mitjafelicijan/abtts/raw/master/samples/25.mp3"></audio>
 
 ## What does it do?
 
