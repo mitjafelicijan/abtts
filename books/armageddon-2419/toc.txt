@@ -5,6 +5,8 @@
 -- words: 27337
 -- length: 1 hour 40 minutes
 
+#chapter0.txt
+
 chapter1.txt
 chapter2.txt
 chapter3.txt
