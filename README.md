@@ -7,8 +7,8 @@
 
 ## What does it do?
 
-- Converts text files into MP3 audiobook.
-- Bakes ID3 tags and cover image to MP3 file.
+- Converts text files into OGG audiobook.
+- Bakes metatags and cover image to OGG file.
 - Has a really awesome reading voice provided by
   [UnrealSpeech](https://unrealspeech.com/).
 
@@ -17,6 +17,16 @@
 **Program uses [virtual
 environments](https://docs.python.org/3/library/venv.html) so make sure that you
 have Python, Pip and virtual environments installed properly.**
+
+On macOS you will need [brew.sh](https://brew.sh/) installed.
+
+- [SoX - Sound eXchange](https://sox.sourceforge.net/)
+  - On Debian-like systems - `sudo apt install sox`
+  - On macOS - `brew install sox`
+- [Vorbis tools](https://github.com/xiph/vorbis-tools)
+  - On Debian-like systems - `sudo apt install vorbis-tools`
+  - On macOS - `brew install vorbis-tools`
+- Then follow instructions below.
 
 ```sh
 git clone git@github.com:mitjafelicijan/abtts.git
@@ -29,19 +39,18 @@ pip install -r requirements.txt
 
 ## How to use it
 
+Creating audiobooks is a two step process. First you prepare an audiobook and
+then you export it.
+
+Pre-requirements:
+
 - First you need to create [UnrealSpeech](https://unrealspeech.com/) account.
-- Create an API Token and store. You will need it for this.
+- Create an API Token and store it somewhere safe. You will need it for this.
 - Generate first book that is provided with this repository. Use the API token
-  in `US_BEARER` variable like in example below.
+  in `US_BEARER` environment variable like in example below.
+- Be sure you are in Python virtual environment.
 
-```sh
-US_BEARER="CW5RhoOX..." python3 abtts.py --book-folder=books/armageddon-2419/
-```
-
-- This will generate MP3 file in `out` directory (provided you didn't mess with
-  `OUT_DIR` variable).
-- A JSON report file with the same slug name as MP3 file will also be generated
-  for you so you can see if all went well.
+To see all the options you can do `python abtts.py --help`.
 
 > This example book was taken from [Standard
 > Ebooks](https://standardebooks.org/ebooks/philip-francis-nowlan/armageddon-2419-a-d). They
@@ -49,21 +58,47 @@ US_BEARER="CW5RhoOX..." python3 abtts.py --book-folder=books/armageddon-2419/
 > of their material is available on [GitHub](https://github.com/standardebooks)
 > as well.
 
+### Preparing audiobook
+
+- This will parse TOC file and call TTS API and generate a bunch of WAV files
+  for each paragraphs from the book in the `out` directory (provided you didn't
+  mess with `OUT_DIR` variable). Mind the `--prepare` flag.
+- A JSON report file will also be generated in the `out` directory for you so
+  you can see if all went well.
+- If by any chance this fails for a paragraph with 500 code you can execute the
+  command again and it will skip already existing and generated
+  paragraphs. Sometimes UnrealSpeech API can behave badly so don't worry about
+  it and just re-run the script.
+
+```sh
+US_BEARER="CW5RhoOX..." python3 abtts.py --book=books/armageddon-2419/ --prepare
+```
+
+### Exporting audiobook
+
+- This is a simpler process which combines all the WAV files that were outcome
+  from prepare procedure and generates one WAV file.
+- Then encoding happens where this WAV file is encoded to OGG file. This may
+  take some time. These files can get gigabytes in size. Be patient.
+- After that metatags and book cover are embedded in OGG file.
+- Mind the `--export` flag.
+
+```sh
+US_BEARER="CW5RhoOX..." python3 abtts.py --book=books/armageddon-2419/ --export
+```
+
 ## Environmental variables
 
 Environmental variables can prefix python command like in the example above with
 `US_BEARER`.
 
-| Variable          | Default value | Description                                           |
-|-------------------|---------------|-------------------------------------------------------|
-| TMP_DIR           | tmp/          | Paragraph MP3's are put                               |
-| OUT_DIR           | out/          | Final audiobook location                              |
-| OMIT_US           | 0             | If 0 API will not get called                          |
-| US_BEARER         | None          | Bearer token for UnrealSpeech                         |
-| US_VOICE_ID       | male-4        | Selected voice ID (male-0..male-4)                    |
-| US_AUDIO_FORMAT   | mp3           | Leave to MP3!                                         |
-| US_BIT_RATE       | 192k          | Leave to default value!                               |
-| START_END_SILENCE | 2000          | How many milliseconds get added at beginning and end. |
+| Variable          | Default value | Description                                     |
+|-------------------|---------------|-------------------------------------------------|
+| TMP_DIR           | tmp/          | Paragraph WAV's files are put here              |
+| OUT_DIR           | out/          | Final audiobook location                        |
+| US_BEARER         | None          | Bearer token for UnrealSpeech                   |
+| US_VOICE_ID       | male-4        | Selected voice ID (male-0..male-4)              |
+| START_END_SILENCE | 2000          | How many seconds get added at beginning and end |
 
 ## Create new audiobooks
 
@@ -73,7 +108,7 @@ Environmental variables can prefix python command like in the example above with
   multiple books together.
 - Books should be split into chapters, but also only one chapter is sufficient.
 
-And example of TOC file.
+And example of a TOC file (`toc.txt`).
 
 ```sql
 -- title: Armageddon 2419 A.D.
@@ -93,10 +128,11 @@ chapter4.txt
 
 - Chapter files like `chapter1.txt` must be all in the same folder as `toc.txt`.
 - You can comment lines if you want with `#`. These files will be omitted.
-- Lines starting with `--` are special meta tags and (title, author, year,
-  cover, words, length) are all required. They can be empty, but they must be
-  provided.
-- Cover images are baked into the MP3 file. Cover image MUST be a JPEG.
+- Lines starting with `--` are special meta tags and ( author, year, cover,
+  words, length) are all required. They can be empty, but they must be provided.
+- Title (`title`) tag must not be empty. Filenames get generated from this value
+  so make sure this tag is populated.
+- Cover images are baked into the OGG file. Cover image MUST be a JPEG.
 
 ## Included books
 
@@ -109,7 +145,6 @@ chapter4.txt
 ## Libraries used
 
 - https://github.com/psf/requests
-- https://github.com/jiaaro/pydub
 - https://github.com/quodlibet/mutagen
 - https://github.com/un33k/python-slugify
 
