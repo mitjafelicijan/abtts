@@ -135,7 +135,7 @@ def prepare_audiobook(folder: str):
     print(" - Characters: {}".format(meta["book"]["characters"]))
 
     # Ask to continue before wasting credits.
-    print("\nThis will use up ~{} characters on your account.".format(meta["book"]["characters"]))
+    print("\nThis will use up ~{} characters on your account.".format(format(meta["book"]["characters"], ",")))
     response = input("Continue? (y/n): ").strip().lower()
     if response != "y":
         print("Ok, bye!")
