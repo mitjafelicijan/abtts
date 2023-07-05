@@ -141,7 +141,39 @@ def prepare_audiobook(folder: str):
         print("Ok, bye!")
         sys.exit(0)
 
-    # Generates wav files.
+    # Generate introduction WAV file.
+    print("> Processing introduction...")
+    try:
+        wav_filepath = os.path.join(TMP_DIR, meta["book"]["slug"] ,"introduction.wav")
+        intro_text = "{}\nBook by {}\nWritten in year {}.\nThis book has {} words.".format(
+            meta["book"]["title"],
+            meta["book"]["author"],
+            meta["book"]["year"],
+            meta["book"]["words"],
+        )
+        
+        response = requests.post(
+            "https://api.v5.unrealspeech.com/speech",
+            headers = {
+                "Authorization" : "Bearer {}".format(US_BEARER)
+            },
+            json = {
+                "Text": intro_text,
+                "VoiceId": US_VOICE_ID,
+                "AudioFormat": "wav",
+            }
+        )
+        if response.status_code != 200:
+            print("ERROR: TTS failed with error {} on introduction".format(response.status_code))
+            sys.exit(1)
+        
+        with open(wav_filepath, 'wb') as fp:
+            fp.write(response.content)
+    except requests.exceptions.RequestException as e:
+        print("ERROR: Request failed: {}".format(e))
+        sys.exit(1)
+
+    # Generates WAV files.
     print()
     for idx, paragraph in enumerate(meta["paragraphs"]):
         wav_filepath = os.path.join(TMP_DIR, meta["book"]["slug"] ,"{}.wav".format(idx))
@@ -162,14 +194,14 @@ def prepare_audiobook(folder: str):
                     "Text": paragraph,
                     "VoiceId": US_VOICE_ID,
                     "AudioFormat": "wav",
-                    }
+                }
             )
 
             if response.status_code != 200:
                 print("ERROR: TTS failed with error {} on index {} on paragraph\n\n".format(
                     response.status_code,
                     idx,
-                    paragraph
+                    paragraph,
                 ))
                 sys.exit(1)
 
@@ -189,7 +221,6 @@ def prepare_audiobook(folder: str):
         file_size = os.path.getsize(wav_filepath)
         print(" - {}\t{}".format(wav_filepath, sizeof_fmt(file_size)))
 
-# sox mp3.mp3 mp3withsilence.mp3 pad 0 1
 def export_audiobook(folder: str):
     meta = parse_toc_file(folder)
     
@@ -203,6 +234,7 @@ def export_audiobook(folder: str):
     print("> Generating file `{}`...".format(export_waw_filepath))
     sox_command = []
     sox_command.append("sox")
+    sox_command.append(os.path.join(TMP_DIR, meta["book"]["slug"], "introduction.wav"))
     for idx, paragraph in enumerate(meta["paragraphs"]):
         wav_filepath = os.path.join(TMP_DIR, meta["book"]["slug"], "{}.wav".format(idx))
         if not os.path.exists(wav_filepath):
